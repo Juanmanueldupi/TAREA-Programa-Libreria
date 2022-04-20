@@ -9,10 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog - About</title>
+    {%block tittle%}
+    <title>TAREA: Programa Librería</title>
+    {%endblock%}
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url_for('static', vendor/bootstrap/css/bootstrap.min.css)}}" rel="stylesheet">
 
     <!-- Theme CSS -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
@@ -48,18 +50,18 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="index.html">Home</a>
+                    {%block menu%}<li>
+                        <a href="index.html">Principal</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="biblioteca.html">Biblioteca</a>
                     </li>
                     <li>
-                        <a href="post.html">Sample Post</a>
+                        <a href="post.html">Categorias</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
+                        <a href="contact.html">Contacto</a>
+                    </li>{%endblock%}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -69,33 +71,32 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/about-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>About Me</h1>
+                    <div class="site-heading">
+                        {%block titulo%}<h1>Biblioteca</h1>
                         <hr class="small">
-                        <span class="subheading">This is what I do.</span>
+                        <span class="subheading">Juan Manuel Durán Piñero</span>{%endblock%}
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum molestiae debitis nobis, quod sapiente qui voluptatum, placeat magni repudiandae accusantium fugit quas labore non rerum possimus, corrupti enim modi! Et.</p>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {%block contenido%}<ul>
+                        {% for libro in libros -%}
+                            <li><a href="/libro/{{libro.isbn}}">{{libro.title}}</a></li>
+                        {% endfor %}
+                    </ul>{%endblock%}
+                </div>
             </div>
         </div>
-    </div>
-
-    <hr>
-
+    </article>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -103,23 +104,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a target="_blank" href="https://github.com/Juanmanueldupi/TAREA-Programa-Libreria" title="">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -127,7 +112,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Juan Manuel Durán Piñero 2022 </p>
                 </div>
             </div>
         </div>
