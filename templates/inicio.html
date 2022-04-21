@@ -1,0 +1,19 @@
+{%extends "base.html" %}
+{%block tittle%}
+<title>Inicio</title>
+{%endblock%}
+
+{%block titulo}
+<h1>Inicio</h1>
+<hr class="small">
+<span class="subheading">Listado de Libros</span>
+{%endblock%}
+    
+    {%block contenido%}
+    <ul>
+        {% for libro in libros -%}
+            <li><a href="/libro/{{libro.isbn}}">{{libro.title}}</a></li>
+        {% endfor %}
+    </ul>
+    {%endblock%}
+    
