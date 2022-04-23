@@ -1,22 +1,22 @@
-import json 
-from os import abort
-from flask import Flask, render_template
-app = Flask(__name__)
+from flask import Flask, render_template, abort
+import os
+import json
 
-@app.route("/")
-def index():
-    return render_template('index.html')
-    
-@app.route("/about")
-def about():
-    return render_template('about.html')
+app = Flask (__name__)
 
-@app.route("/contact")
-def contact():  
-    return render_template('contact.html')
+with open("books.json") as fichero:
+    datos=json.load(fichero)
 
-@app.route("/error")
-def error():
-    return abort (404)
+@app.route('/',methods=["GET","POST"])
+def inicio():
+    return render_template("inicio.html",libros=datos)
 
-app.run("0.0.0.0", 5000, debug=True)
+@app.route('/libro/<isbn>',methods=["GET","POST"])
+def libro(isbn):
+    for book in datos:
+        if "isbn" in book.keys() and isbn == book["isbn"]:
+            return render_template("biblioteca.html", libro=book)
+    abort(404)
+
+
+app.run('0.0.0.0' ,debug=False)

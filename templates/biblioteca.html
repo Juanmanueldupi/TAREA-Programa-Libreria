@@ -1,13 +1,68 @@
-{%extends "base.html" %}
+{% extends "base.html" %}
 
-{%block tittle%}
-<title>Biblioteca</title>
+    <!-- Titulo-->
+
+{%block tittle%}<title>Biblioteca</title>{%endblock%}
+
+
+{%block titulo%}<h1>Biblioteca</h1>
+							<hr class="small">
+							<h3 class="subheading">Juan Manuel Durán Piñero</h3>
 {%endblock%}
+{%block css%} {%endblock%}
+{% block content %}
 
-{%block titulo}
-<h1>Biblioteca</h1>
-<hr class="small">
-<span class="subheading">Listado de Libros</span>
+<div class="container">
+
+    <h1>{{libro.title}}</h1>
+
+    <!-- Portada de los libros-->
+
+                {% if libro.thumbnailUrl %}
+                <h4>Portada:</h4>
+                    <img src="{{libro.thumbnailUrl}}" alt="Portada"/>
+                 {% endif %}
+    
+    <!-- MEAP = Este libro aun no se ha publicado -->
+
+                {% if libro.status == "MEAP" %} 
+                    <p> ESTE LIBRO NO SE HA PUBLICADO.</p>
+                {% endif %}
+
+    <!--Número de páginas-->
+
+                <h4> Páginas: {{libro.pageCount}}</h4><br>
+
+    <!--Autores-->
+
+                {% if libro.authors %}
+                    <h4>Autor/Autores:</h4>
+                    {% for autor in libro.authors %}
+                    <ul>
+                        <li><p>{{autor}}</p></li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}     
+
+    <!--Descripción del libro-->
+
+                {% if libro.shortDescription %}
+                  <h4>Descripción:</h4>
+                   <p> {{libro.shortDescription}}</p><br>
+                {% endif %}
+
+    <!-- Categorías-->
+
+                {% if libro.categories %}
+                    <h4>Categorias:</h4>
+                    {% for categoria in libro.categories %}
+                    <ul>
+                        <li><p>{{categoria}}</p></li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
+                <a href="../">Volver</a>
+</div>
+
 {%endblock%}
-
-{%block contenido%}

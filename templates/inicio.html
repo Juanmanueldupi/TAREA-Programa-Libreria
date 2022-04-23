@@ -1,19 +1,25 @@
-{%extends "base.html" %}
-{%block tittle%}
-<title>Inicio</title>
-{%endblock%}
 
-{%block titulo}
-<h1>Inicio</h1>
-<hr class="small">
-<span class="subheading">Listado de Libros</span>
-{%endblock%}
-    
-    {%block contenido%}
-    <ul>
-        {% for libro in libros -%}
-            <li><a href="/libro/{{libro.isbn}}">{{libro.title}}</a></li>
-        {% endfor %}
-    </ul>
-    {%endblock%}
-    
+{% extends "base.html" %}
+
+    <!-- Titulo-->
+
+{%block tittle%}<title>TAREA: Programa Librería</title>{%endblock%}
+
+    <!-- Contenido-->
+
+{% block content %}
+
+						<header class="header">
+       						<h2>Listado de Libros:</h2>
+						</header>
+						<ul>
+							{% for element in libros %}
+								{% if element.isbn %}
+									<li><a href="/libro/{{element.isbn}}">{{element.title}}</a></li>
+								{% else %}
+									<li><a href="/">{{element.title}} (No tiene ISBN)</a></li>
+								{% endif %}
+								<br>
+							{% endfor %}
+						</ul>
+{% endblock %}
